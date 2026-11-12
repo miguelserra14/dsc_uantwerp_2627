@@ -13,7 +13,7 @@ The code is generic and driven by a config; column-to-type assignment is filled 
 | Project layout | `data/` (Excel files, git-ignored) · `preprocessing/` (`preprocessing.ipynb`, `col_config.py`, `col_config.example.py`) · `README.md` |
 | Column assignment | `preprocessing/col_config.py` (target + column lists), loaded by the CONFIG cell; **git-ignored** because variable names are confidential. Template: `preprocessing/col_config.example.py` |
 | Data files | In `data/` at the project root; the notebook uses `"data_dir": "../data"` (relative to `preprocessing/`). A full path in CONFIG also works. Not tracked by git (see `.gitignore`) |
-| Libraries | pandas / numpy / scikit-learn only (no external packages) |
+| Libraries | Preprocessing logic: pandas / numpy / scikit-learn only (no imbalanced-learn / category_encoders); file reading uses openpyxl, xlrd, msoffcrypto-tool |
 | Target | Multiclass |
 | Models consuming the data | Tree-based / boosting |
 | Output | DataFrames with feature names (X/y train, val, test; X scoring) |
@@ -81,3 +81,31 @@ Left out for now (may be added later):
 - Every imputer, clipper, scaler and encoder is fitted on the training set only.
 - WoE / supervised ratio mappings are computed from the training target only.
 - Validation, test and scoring sets are only transformed.
+
+## Backlog: ideas to stand out (not decided yet)
+Course note: past winners got ahead mainly through **data preprocessing and modelling**.
+Each item below still needs a decision (asked as multiple choice) before implementation.
+Ordered by expected impact. Recommended first: **3 + 2 + 1**; 4 and 5 are quick safety checks.
+
+1. **Ablation table** – measure on validation the effect of each preprocessing step
+   (baseline → + high-card encoding → + new features → + feature removal …), so every
+   README decision has a measured justification.
+2. **Ordinal target** – if the EPC label is an ordered scale (A–G), exploit the order:
+   - ordinal target encoding: one column with the mean class rank per category (instead of K one-vs-rest columns);
+   - distance-aware metric next to accuracy (MAE on rank, quadratic weighted kappa);
+   - compare classification with regression on the rank + rounding.
+3. **Out-of-fold target encoding** – compute ratio / WoE (or ordinal) encodings with K-fold on train
+   (each row encoded from the other folds); val / test / scoring use the full-train mapping.
+   Avoids overfitting on rare categories with tree models.
+4. **Adversarial validation** – classifier train-vs-scoring; AUC ≈ 0.5 means similar distributions.
+   Features that separate them drift between sets → remove or transform them.
+5. **Duplicate / grouped rows** – check exact duplicates and whether one entity (property / customer)
+   appears in several rows; if so, split by group (GroupShuffleSplit / GroupKFold) to avoid optimistic validation.
+6. **Domain feature engineering** (adapt to the variable descriptions) – age instead of year (and age bands
+   following regulation changes), ratios of related variables (per m², per room), renovation flags,
+   group aggregates (e.g. mean per region / type, fitted on train only).
+7. **Smarter handling of the many categorical columns** – LightGBM / CatBoost native categoricals
+   (CatBoost uses ordered target statistics internally), or feature selection: drop near-constant,
+   duplicated or highly correlated columns; permutation importance on validation.
+8. **Class imbalance without SMOTE** – class weights (`class_weight="balanced"` / `sample_weight`)
+   instead of oversampling, which works poorly with many categorical columns.
