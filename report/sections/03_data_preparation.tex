@@ -1,0 +1,55 @@
+% =====================================================================
+% 3. DATA PREPARATION
+% Rubric: cleaning, preprocessing, transformations (missing values,
+% outliers, duplicates, feature engineering, encoding).
+% JUSTIFY key choices that improved data quality and model performance.
+% Source: README "Preprocessing decisions" + Roadmap Phases 1-3.
+% Rule of thumb: every choice = what + why + evidence (CV delta, ref. to
+% Table~\ref{tab:ablation}).
+% Page budget: \todo{decide}
+% =====================================================================
+\section{Data Preparation}
+\label{sec:data-preparation}
+
+% --- 3.1 Pipeline and leakage ---------------------------------------
+\paragraph{Pipeline and leakage control.}
+All transformations are fitted on training folds only and applied to
+validation, test and scoring data; the preprocessor is part of a
+scikit-learn \citep{pedregosa2011scikit} \texttt{Pipeline} and is refitted in every cross-validation
+fold, so target-based encodings never see the held-out labels.
+\todo{Split used (train/val/test, stratified, seed 42) and CV scheme.}
+
+% --- 3.2 Steps -------------------------------------------------------
+% One compact table instead of long text saves space.
+\begin{table}[h]
+  \centering\small
+  \caption{Preparation steps and their justification.}
+  \label{tab:prep}
+  \begin{tabularx}{\linewidth}{@{}l X X@{}}
+    \toprule
+    Step & Choice & Justification / evidence \\
+    \midrule
+    Missing values     & \todo{drop $>$60\% missing; median + indicator; ``Missing'' category} & \todo{} \\
+    Outliers           & \todo{clip 1st/99th percentile (linear profile only)} & \todo{} \\
+    Duplicates         & \todo{} & \todo{} \\
+    Rare categories    & \todo{grouped into ``Other'' below 1\%} & \todo{} \\
+    Low-card. nominal  & \todo{one-hot / native categorical} & \todo{} \\
+    High-card. nominal & \todo{out-of-fold target encoding (ordinal)} & \todo{} \\
+    Ordinal variables  & \todo{rank encoding with explicit order} & \todo{} \\
+    Dates              & \todo{year, month, weekday, weekend} & \todo{} \\
+    Scaling            & \todo{z-score (distance/linear models only)} & \todo{} \\
+    Class imbalance    & \todo{no oversampling; class weights tested} & \todo{} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+% --- 3.3 Feature engineering ----------------------------------------
+\paragraph{Feature engineering.}
+\todo{Domain features (ratios, age, group aggregates, counts, missing
+count per row) and their effect in CV.}
+
+% --- 3.4 Alternatives rejected --------------------------------------
+\paragraph{Alternatives considered.}
+\todo{What was tried and rejected (e.g.\ SMOTE, KNN/iterative imputation,
+row removal by Isolation Forest) and why -- full list in
+Appendix~\ref{app:coverage}.}

@@ -1,0 +1,5 @@
+*.ipynb filter=nbstripout
+*.zpln filter=nbstripout
+*.ipynb diff=ipynb
+# Course tutorials (no project data): keep their outputs
+tutorials/**/*.ipynb !filter !diff

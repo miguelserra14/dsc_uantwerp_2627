@@ -1,0 +1,45 @@
+% =====================================================================
+% 1. BUSINESS UNDERSTANDING
+% Rubric: problem/goal from a business perspective, purpose, objectives.
+% Page budget: \todo{decide}
+% =====================================================================
+\section{Business Understanding}
+\label{sec:business}
+The report follows the CRISP-DM process \citep{chapman2000crisp}.
+
+% --- 1.1 Context -----------------------------------------------------
+% Why a bank cares about EPC labels: ESG reporting, green mortgages,
+% climate/transition risk in the collateral portfolio, regulation.
+% Cite sources (EU taxonomy / EBA / EPBD) in references.bib.
+\paragraph{Context.}
+\todo{Why the EPC label of a property matters to a bank (ESG, risk, products).}
+
+% --- 1.2 Problem -----------------------------------------------------
+% The label is not always available -> needs to be estimated.
+\paragraph{Problem.}
+\todo{What is missing today and what decision it blocks.}
+
+% --- 1.3 Data-mining goal --------------------------------------------
+% Translate the business goal into a ML task.
+\paragraph{Data-mining goal.}
+Predict the \epc{} label on the ordered scale
+A+ $>$ A $>$ B $>$ C $>$ D $>$ E $>$ F $>$ G (eight ordinal classes)
+for every record of the scoring set.
+\todo{One sentence on why this is ordinal multiclass, not plain classification.}
+
+% --- 1.4 Success criteria --------------------------------------------
+\paragraph{Success criteria.}
+The official metric is \onenotch{}: a prediction is correct when it is
+within one class of the true label, i.e.\
+$\text{acc}_{1} = \frac{1}{n}\sum_i \mathbb{1}\big[|r(\hat y_i) - r(y_i)| \le 1\big]$,
+with $r(\cdot)$ the rank A+\,=\,0, \dots, G\,=\,7.
+Exact accuracy and the mean absolute rank error are reported as secondary metrics.
+\todo{Business reading: why a 1-class error is acceptable and a 2+-class error is not.}
+
+% --- 1.5 Objectives / research questions -----------------------------
+\paragraph{Objectives.}
+\begin{enumerate}
+  \item \todo{O1: accurate predictions (metric above).}
+  \item \todo{O2: which groups of information drive the label (explainability).}
+  \item \todo{O3: actionable recommendation for the bank.}
+\end{enumerate}

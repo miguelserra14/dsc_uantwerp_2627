@@ -1,0 +1,62 @@
+% =====================================================================
+% 2. DATA UNDERSTANDING
+% Rubric: overall check (size, feature types, missing values,
+% distributions), insights and patterns.
+% Source: Roadmap Phase 2 (README). Figures are produced locally.
+% Page budget: \todo{decide}
+% =====================================================================
+\section{Data Understanding}
+\label{sec:data-understanding}
+
+% --- 2.1 Overview ----------------------------------------------------
+\paragraph{Overview.}
+\todo{Number of rows in training and scoring, number of variables,
+split by type (numeric / nominal / ordinal / date), one-line description
+of the feature groups.}
+
+\begin{table}[h]
+  \centering\small
+  \caption{Dataset overview.}
+  \label{tab:overview}
+  \begin{tabular}{lrr}
+    \toprule
+    & Training & Scoring \\
+    \midrule
+    Rows                     & \todo{} & \todo{} \\
+    Numeric variables        & \todo{} & \todo{} \\
+    Categorical variables    & \todo{} & \todo{} \\
+    Date variables           & \todo{} & \todo{} \\
+    Variables with missing values & \todo{} & \todo{} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% --- 2.2 Target ------------------------------------------------------
+\paragraph{Target distribution.}
+\todo{Class frequencies; imbalance; what it implies for the metric
+(\onenotch{} rewards frequent classes).}
+
+\begin{figure}[h]
+  \centering
+  \figplaceholder{Fig.: EPC label distribution (bar chart, ordered A+ .. G)}
+  \caption{Distribution of the \epc{} label in the training data.}
+  \label{fig:target}
+\end{figure}
+
+% --- 2.3 Data quality ------------------------------------------------
+\paragraph{Data quality.}
+\todo{Missing values (share per variable, mechanism: is missingness
+related to the label?), duplicates / same property in several rows,
+sentinel or capped values, near-constant / highly correlated columns.}
+
+% --- 2.4 Train vs scoring --------------------------------------------
+\paragraph{Training vs scoring.}
+\todo{Drift check: adversarial validation AUC and PSI per variable;
+conclusion for the validation scheme.}
+
+% --- 2.5 Insights ----------------------------------------------------
+\paragraph{Key insights.}
+\begin{itemize}
+  \item \todo{Insight 1 -> consequence for preparation/modelling}
+  \item \todo{Insight 2 -> ...}
+\end{itemize}

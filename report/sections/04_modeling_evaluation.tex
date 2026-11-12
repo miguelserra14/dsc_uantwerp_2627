@@ -1,0 +1,96 @@
+% =====================================================================
+% 4. MODELING AND EVALUATION
+% Rubric: models used, how the modelling was done, performance with
+% appropriate metrics. Extra credit: discussion of choices and
+% rationale, EXPLAINABLE AI, ITERATIVE IMPROVEMENT PROCESS.
+% Source: experiments.csv / folds.csv (local), Roadmap Phases 0-4.
+% Page budget: \todo{decide}
+% =====================================================================
+\section{Modeling and Evaluation}
+\label{sec:modeling}
+
+% --- 4.1 Evaluation protocol ----------------------------------------
+\paragraph{Evaluation protocol.}
+\todo{Repeated stratified k-fold (folds x repeats), metric =
+\onenotch{} via a custom scorer in all CV and tuning, held-out test set
+used once, mean $\pm$ std over folds.}
+
+% --- 4.2 Ordinal target and decision rule ---------------------------
+\paragraph{Using the ordinal structure.}
+Because a one-class error is free, the class that maximises the
+expected \onenotch{} is
+$\hat k = \arg\max_k \big(p_{k-1} + p_k + p_{k+1}\big)$
+rather than $\arg\max_k p_k$.
+\todo{Compare: argmax vs window rule vs regression on the rank + rounding.}
+
+% --- 4.3 Models compared --------------------------------------------
+\begin{table}[h]
+  \centering\small
+  \caption{Model comparison under the same CV harness (mean $\pm$ std).}
+  \label{tab:models}
+  \begin{tabular}{lccc}
+    \toprule
+    Model & \onenotch{} & Exact acc. & MAE (rank) \\
+    \midrule
+    Majority class (baseline)      & \todo{} & \todo{} & \todo{} \\
+    Logistic regression            & \todo{} & \todo{} & \todo{} \\
+    k-nearest neighbours           & \todo{} & \todo{} & \todo{} \\
+    Decision tree                  & \todo{} & \todo{} & \todo{} \\
+    Random forest                  & \todo{} & \todo{} & \todo{} \\
+    SVM                            & \todo{} & \todo{} & \todo{} \\
+    Histogram gradient boosting    & \todo{} & \todo{} & \todo{} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Tuning.}
+\todo{Search method (e.g.\ halving random search), search space,
+selected hyperparameters (full grid in the appendix).}
+
+% --- 4.4 Iterative improvement (ablation) ---------------------------
+% The rubric explicitly rewards this. Each row = one change, measured.
+\paragraph{Iterative improvement.}
+\begin{table}[h]
+  \centering\small
+  \caption{Ablation: cumulative effect of each step on CV \onenotch{}.}
+  \label{tab:ablation}
+  \begin{tabular}{clcc}
+    \toprule
+    \# & Step added & \onenotch{} & $\Delta$ \\
+    \midrule
+    0 & Baseline (probe model, basic preprocessing) & \todo{} & -- \\
+    1 & \todo{e.g.\ window decision rule}           & \todo{} & \todo{} \\
+    2 & \todo{e.g.\ target encoding high-card.}     & \todo{} & \todo{} \\
+    3 & \todo{e.g.\ domain features}                & \todo{} & \todo{} \\
+    4 & \todo{e.g.\ tuning}                         & \todo{} & \todo{} \\
+    \midrule
+    & Final model on held-out test set              & \todo{} & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% --- 4.5 Error analysis ---------------------------------------------
+\paragraph{Error analysis.}
+\todo{Confusion matrix and share of errors by notch distance (0, 1, 2+);
+which classes are confused.}
+
+% --- 4.6 Explainability ---------------------------------------------
+\paragraph{Explainability.}
+\todo{Grouped permutation importance on held-out folds (per variable and
+per feature group), partial dependence for the top drivers; link back to
+objective O2.}
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.49\linewidth}
+    \centering\figplaceholder{Confusion matrix (ordered labels)}
+    \caption{Confusion matrix.}
+    \label{fig:confusion}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.49\linewidth}
+    \centering\figplaceholder{Grouped permutation importance}
+    \caption{Importance per feature group.}
+    \label{fig:importance}
+  \end{subfigure}
+  \caption{Error analysis and explainability of the final model.}
+\end{figure}

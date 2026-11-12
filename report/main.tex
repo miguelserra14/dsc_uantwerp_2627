@@ -1,0 +1,76 @@
+% =====================================================================
+% DSC 2026-2027 (ML4B) - UA Data Challenge 2026, ESG edition
+% Report skeleton (CRISP-DM). Max 5 pages for the counted part.
+%
+% NOT counted in the 5 pages: cover page, Use of AI, references,
+% appendices. The counted part is sections/01..05 -> pages 1-5 below.
+%
+% CONFIDENTIALITY: this file and sections/*.tex are tracked in git.
+% Do not write variable names or data values here until the team has
+% confirmed (Q&A 24/26 Nov) that this is allowed in the repo.
+% Write them only in the Overleaf copy, or keep figures/ git-ignored.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage[numbers]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figures/}}
+\setlist{nosep}
+\captionsetup{font=small}
+
+% --- Writing helpers (remove before submission) ----------------------
+% \todo{...}: red placeholder. Set \showtodostrue -> \showtodosfalse to hide.
+\newif\ifshowtodos \showtodostrue
+\newcommand{\todo}[1]{\ifshowtodos\textcolor{red}{[TODO: #1]}\fi}
+% Placeholder box for figures that do not exist yet
+\newcommand{\figplaceholder}[1]{%
+  \fbox{\parbox[c][3.5cm][c]{0.9\linewidth}{\centering\small #1}}}
+
+% --- Notation used throughout ----------------------------------------
+\newcommand{\onenotch}{1-notch accuracy}
+\newcommand{\epc}{EPC}
+
+\begin{document}
+
+% ===================== Cover page (not counted) ======================
+\input{sections/00_cover}
+
+% ===================== Counted part: max 5 pages =====================
+\clearpage
+\pagenumbering{arabic}
+\input{sections/01_business_understanding}
+\input{sections/02_data_understanding}
+\input{sections/03_data_preparation}
+\input{sections/04_modeling_evaluation}
+\input{sections/05_conclusion}
+% Check: the last page number of the Conclusion must be <= 5.
+
+% ===================== Not counted ===================================
+\clearpage
+\pagenumbering{roman}
+\input{sections/06_use_of_ai}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\input{sections/07_appendix}
+
+\end{document}

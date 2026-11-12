@@ -11,12 +11,60 @@ data/
 # --- Column assignment: confidential variable names (template: col_config.example.py) ---
 col_config.py
 
+# --- Private notes (Crelan 'Internal Information'): never commit, never give to AI ---
+*_PRIVATE.*
+
+# --- Course submission info: kept local (see README) ---
+tutorials/PROJECT_INFO.txt
+
+# --- Design-choice analyses: kept local ---
+design_choices/
+
+# --- Artefacts derived from the data (column names, category levels, results) ---
+outputs/
+*.joblib
+*.pickle
+*.npy
+*.npz
+*.feather
+*.html
+*.log
+
+# --- Report: figures and the compiled PDF show data/results -> kept local ---
+report/figures/
+report/*.pdf
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.out
+report/*.toc
+report/*.fls
+report/*.fdb_latexmk
+report/*.synctex.gz
+report/sections/*.aux
+
+# --- Secrets / environments ---
+.env
+.venv/
+venv/
+
 # --- Backups / caches ---
 *.bak
 .ipynb_checkpoints/
 __pycache__/
 *.pyc
+.pytest_cache/
+.mypy_cache/
+
+# --- OS / OneDrive / Office lock files ---
+Thumbs.db
+desktop.ini
+.DS_Store
+~$*
 
 # --- Local tool settings ---
 .claude/
 .vscode/
+
+# --- Archived AI conversations: may contain confidential context ---
+archived_conversations/
