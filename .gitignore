@@ -1,0 +1,22 @@
+# --- Data: confidential, never commit ---
+data/
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+*.parquet
+*.pkl
+*.zip
+
+# --- Column assignment: confidential variable names (template: col_config.example.py) ---
+col_config.py
+
+# --- Backups / caches ---
+*.bak
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# --- Local tool settings ---
+.claude/
+.vscode/
